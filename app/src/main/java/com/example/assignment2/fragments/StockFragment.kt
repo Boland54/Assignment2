@@ -66,7 +66,7 @@ open class StockFragment : Fragment(), AnkoLogger,
 
         val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onWarehouseClick(viewHolder.itemView as WarehouseModel)
+                onWarehouseClick(viewHolder.itemView.tag as WarehouseModel)
             }
         }
 
@@ -136,7 +136,8 @@ open class StockFragment : Fragment(), AnkoLogger,
 
     override fun onResume() {
         super.onResume()
-        getAllWarehouses(app.auth.currentUser!!.uid)
+        if(this::class == StockFragment::class)
+            getAllWarehouses(app.auth.currentUser!!.uid)
     }
 
     fun getAllWarehouses(userId: String?) {

@@ -14,12 +14,13 @@ class WarehouseApp : Application(), AnkoLogger {
 
     lateinit var auth: FirebaseAuth
     lateinit var database: DatabaseReference
+    lateinit var googleSignInClient: GoogleSignInClient
 
 
 
     override fun onCreate() {
         super.onCreate()
-        info("Donation App started")
+        info("Warehouse App started")
 
     }
 }

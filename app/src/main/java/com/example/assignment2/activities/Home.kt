@@ -16,8 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
-import kotlinx.android.synthetic.main.nav_header_home.view.*
-import org.jetbrains.anko.progressDialog
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -39,7 +37,7 @@ class Home : AppCompatActivity(),
                 Snackbar.LENGTH_LONG).setAction("Action", null).show()
         }
 
-            navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.displayName
+            //navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.displayName
 
         navView.setNavigationItemSelectedListener(this)
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -48,7 +46,7 @@ class Home : AppCompatActivity(),
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.displayName
+       // navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.displayName
 
         ft = supportFragmentManager.beginTransaction()
 
@@ -60,14 +58,16 @@ class Home : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_donate ->
+            R.id.nav_add ->
                 navigateTo(AddFragment.newInstance())
-            R.id.nav_report ->
+            R.id.nav_stock ->
                 navigateTo(StockFragment.newInstance())
-            R.id.nav_report_all ->
+            R.id.nav_stock_all ->
                 navigateTo(StockAllFragment.newInstance())
             R.id.nav_todo ->
                 navigateTo(TodoFragment.newInstance())
+            R.id.nav_aboutus ->
+                navigateTo(AboutUsFragment.newInstance())
             R.id.nav_sign_out ->
                 signOut()
 

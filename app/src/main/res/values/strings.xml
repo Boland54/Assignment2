@@ -40,8 +40,8 @@
     <string name="menu_send">Send</string>
 
 
-    <string name="aboutus_title">Homer for President !!</string>
-    <string name="aboutus_message">Hi, I\'m Homer\n\nPlease vote for me.\n\n Please Please Please Please!!</string>
+    <string name="aboutus_title">Adam Boland</string>
+    <string name="aboutus_message">Hi, Im Adam Boland and this is my 3rd year assignment. The Aim of this assignment is to mak warehouses around ireland more efficient.</string>
 
     <string name="messageLoading">Please wait while we Connect to the Server...</string>
 

@@ -1,19 +1,14 @@
 package com.example.assignment2.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.assignment2.R
 import com.example.assignment2.adapters.WarehouseAdapter
 import com.example.assignment2.adapters.WarehouseListener
-import com.example.assignment2.fragments.StockFragment
 import com.example.assignment2.models.WarehouseModel
 import com.example.assignment2.utils.createLoader
 import com.example.assignment2.utils.hideLoader
@@ -24,7 +19,6 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_stock.view.*
 
 
-import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
 class StockAllFragment : StockFragment(),

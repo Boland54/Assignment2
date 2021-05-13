@@ -55,9 +55,9 @@ class EditFragment : Fragment(), AnkoLogger {
 
         root.editUpdateButton.setOnClickListener {
             showLoader(loader, "Updating Stock on Server...")
-            updateDonationData()
-            updateDonation(editWarehouse!!.uid, editWarehouse!!)
-            updateUserDonation(app.auth.currentUser!!.uid,
+            updateWarehouseData()
+            updateWarehouse(editWarehouse!!.uid, editWarehouse!!)
+            updateUserWarehouse(app.auth.currentUser!!.uid,
                                editWarehouse!!.uid, editWarehouse!!)
         }
 
@@ -74,7 +74,7 @@ class EditFragment : Fragment(), AnkoLogger {
             }
     }
 
-    fun updateDonationData() {
+    fun updateWarehouseData() {
         editWarehouse!!.stname = root.editName.text.toString()
         editWarehouse!!.stquantity = root.editQuantity.text.toString()
         editWarehouse!!.stcountry = root.editCountry.text.toString()
@@ -82,7 +82,7 @@ class EditFragment : Fragment(), AnkoLogger {
         editWarehouse!!.palletnumber = root.editPNumber.text.toString()
     }
 
-    fun updateUserDonation(userId: String, wid: String?, warehouse: WarehouseModel) {
+    fun updateUserWarehouse(userId: String, wid: String?, warehouse: WarehouseModel) {
         app.database.child("user-stocks").child(userId).child(wid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -101,7 +101,7 @@ class EditFragment : Fragment(), AnkoLogger {
                 })
     }
 
-    fun updateDonation(wid: String?, warehouse: WarehouseModel) {
+    fun updateWarehouse(wid: String?, warehouse: WarehouseModel) {
         app.database.child("stocks").child(wid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {

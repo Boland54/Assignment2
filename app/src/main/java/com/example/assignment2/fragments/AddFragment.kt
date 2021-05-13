@@ -12,15 +12,12 @@ import com.example.assignment2.main.WarehouseApp
 import com.example.assignment2.models.WarehouseModel
 import com.example.assignment2.utils.*
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.card_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import java.lang.String.format
 import java.util.HashMap
 
 
