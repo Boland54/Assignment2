@@ -26,7 +26,7 @@
 
 
     <string name="button_addStock">Add</string>
-    <string name="hint_palletNumber">Number</string>
+    <string name="hint_palletNumber">Pallet Number</string>
     <string name="hint_palletType">Pallet Type</string>
     <string name="hint_country">Country</string>
     <string name="hint_stockQuantity">Quantity</string>

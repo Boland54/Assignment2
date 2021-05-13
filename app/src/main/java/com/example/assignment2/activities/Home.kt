@@ -32,10 +32,6 @@ class Home : AppCompatActivity(),
         app = application as WarehouseApp
 
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action",
-                Snackbar.LENGTH_LONG).setAction("Action", null).show()
-        }
 
             //navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.displayName
 
@@ -82,14 +78,6 @@ class Home : AppCompatActivity(),
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.action_donate -> toast("You Selected Donate")
-            R.id.action_report -> toast("You Selected Report")
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))

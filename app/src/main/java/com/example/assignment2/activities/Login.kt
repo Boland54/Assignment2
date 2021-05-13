@@ -1,5 +1,6 @@
 package com.example.assignment2.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -16,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -141,6 +143,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
     private fun signOut() {
         app.auth.signOut()
+        app.googleSignInClient.signOut()
         updateUI(null)
     }
 
@@ -232,6 +235,34 @@ class Login : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+
+    companion object {
+        private const val TAG = "EmailPassword"
+        private const val RC_SIGN_IN = 9001
+    }
+
+    // [START onactivityresult]
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account!!)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e)
+                // [START_EXCLUDE]
+                updateUI(null)
+                // [END_EXCLUDE]
+            }
+        }
+    }
+    // [END onactivityresult]
+
     // [START google signin]
     private fun googleSignIn() {
         val signInIntent = app.googleSignInClient.signInIntent
@@ -267,8 +298,5 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 }
     }
 
-    companion object {
-        private const val TAG = "EmailPassword"
-        private const val RC_SIGN_IN = 9001
-    }
+
 }
