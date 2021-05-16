@@ -7,12 +7,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment2.R
+import com.example.assignment2.adapters.WarehouseAdapter
+import com.example.assignment2.adapters.WarehouseListener
+import com.example.assignment2.models.WarehouseModel
 import com.example.assignment2.todo.Todo
 import kotlinx.android.synthetic.main.item_todo.view.*
 
-class TodoAdapter(
-    private val todos: MutableList<Todo>
-) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+
+interface TodoListener {
+    fun onTodoClick(todo: Todo)
+}
+
+class TodoAdapter constructor(var todolist: ArrayList<Todo>,
+                             private val listener: TodoListener)
+    : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -27,12 +35,12 @@ class TodoAdapter(
     }
 
     fun addTodo(todo: Todo) {
-        todos.add(todo)
-        notifyItemInserted(todos.size - 1)
+        todolist.add(todo)
+        notifyItemInserted(todolist.size - 1)
     }
 
     fun deleteDoneTodos() {
-        todos.removeAll { todo ->
+        todolist.removeAll { todo ->
             todo.isChecked
         }
         notifyDataSetChanged()
@@ -47,7 +55,7 @@ class TodoAdapter(
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val curTodo = todos[position]
+        val curTodo = todolist[position]
         holder.itemView.apply {
             tvTodoTitle.text = curTodo.title
             cbDone.isChecked = curTodo.isChecked
@@ -60,7 +68,7 @@ class TodoAdapter(
     }
 
     override fun getItemCount(): Int {
-        return todos.size
+        return todolist.size
     }
 }
 

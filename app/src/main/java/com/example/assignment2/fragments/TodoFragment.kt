@@ -14,18 +14,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment2.R
 import com.example.assignment2.adapters.WarehouseAdapter
 import com.example.assignment2.main.WarehouseApp
+import com.example.assignment2.models.WarehouseModel
 import com.example.assignment2.todo.Todo
 import com.example.assignment2.todo.TodoAdapter
+import com.example.assignment2.todo.TodoListener
+import kotlinx.android.synthetic.main.card_add.*
+import kotlinx.android.synthetic.main.fragment_add.view.*
 
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.fragment_stock.view.*
+import kotlinx.android.synthetic.main.fragment_todo.*
+import kotlinx.android.synthetic.main.fragment_todo.view.*
 import kotlinx.android.synthetic.main.item_todo.view.*
 
 
-class TodoFragment : Fragment() {
+class TodoFragment : Fragment() , TodoListener {
 
-    private lateinit var todoAdapter: TodoAdapter
+    lateinit var todoAdapter: TodoAdapter
     lateinit var app: WarehouseApp
     lateinit var loader : AlertDialog
     lateinit var root: View
@@ -40,15 +46,27 @@ class TodoFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        root = inflater.inflate(R.layout.fragment_main, container, false)
+        root = inflater.inflate(R.layout.fragment_todo, container, false)
         activity?.title = getString(R.string.action_todo)
 
-        root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
+        root.rvTodoItems.setLayoutManager(LinearLayoutManager(activity))
+
+        setButtonListener(root)
+        setDeleteButtonListener(root)
+        return root;
+
+    }
+
+    override fun onTodoClick(todo: Todo) {
+        activity!!.supportFragmentManager.beginTransaction()
+               // .replace(R.id.homeFrame, TodoFragment.newInstance(todo))
+                .addToBackStack(null)
+                .commit()
+    }
 
 
-
-
-        btnAddTodo.setOnClickListener {
+    fun setButtonListener( layout: View) {
+        layout.btnAddTodo.setOnClickListener {
             val todoTitle = etTodoTitle.text.toString()
             if(todoTitle.isNotEmpty()) {
                 val todo = Todo(todoTitle)
@@ -56,10 +74,13 @@ class TodoFragment : Fragment() {
                 etTodoTitle.text.clear()
             }
         }
-        btnDeleteDoneTodos.setOnClickListener {
-            todoAdapter.deleteDoneTodos()
+    }
+
+    fun setDeleteButtonListener( layout: View) {
+        layout.btnDeleteDoneTodos.setOnClickListener {
+                todoAdapter.deleteDoneTodos()
+
         }
-        return(root)
     }
 
 
